@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TestPerformance
 {
-    public class ContainsKeyTest : Test
+    public class ContainsKeyTests : Test
     {
         public int Counter = 1000;
         public int DictionaryCounter = 3000;

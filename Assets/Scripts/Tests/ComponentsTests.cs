@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace TestPerformance
 {
-    public class TestComponents : Test
+    public class ComponentsTests : Test
     {
         public int TargetNumber = 100;
-        public TestGetComponent notoptimized;
-        public TestGetComponent optimized;
+        public GetComponentTests notoptimized;
+        public GetComponentTests optimized;
 
         // Start is called before the first frame update
         void Start()

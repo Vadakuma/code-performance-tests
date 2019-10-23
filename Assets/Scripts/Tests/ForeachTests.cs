@@ -41,7 +41,7 @@ public struct ObjectInfo
 
 namespace TestPerformance
 {
-    public class ForeachTest : Test
+    public class ForeachTests : Test
     {
         public GameObject target;
         public int TargetNumber = 100;

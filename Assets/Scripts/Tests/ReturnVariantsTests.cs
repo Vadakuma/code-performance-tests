@@ -5,38 +5,23 @@ using UnityEngine;
 
 namespace TestPerformance
 {
-    public class FieldVsProperty : Test
+    public class ReturnVariantsTests : Test
     {
         public int Counter = 1000;
-
-        public GameObject target;
-
-        public GameObject Target
-        {
-            get
-            {
-                if (target == null)
-                    return null;
-                return target;
-            }
-        }
 
 
         public override void DoTest()
         {
             base.DoTest();
-            // avoiding memory allocate procces impact time
-            GetField(1); GetProperty(1);
 
-            var resultfield = GetField(Attempts);
+            var testOutMethod = TestOutMethod(Attempts);
 
-            var resultprop = GetProperty(Attempts);
+            var testReturnMethod = TestReturnMethod(Attempts);
 
-            WriteResult(Counter.ToString(), resultfield, resultprop);
+            WriteResult(Counter.ToString(), testOutMethod, testReturnMethod);
         }
 
-
-        public string GetField(int attempts)
+        private string TestOutMethod(int attempts)
         {
             timeResult = 0;
 
@@ -46,9 +31,7 @@ namespace TestPerformance
 
                 for (int jdx = 0; jdx < Counter; ++jdx)
                 {
-                    var t = target;
-                    if (t)
-                        continue;
+                    OutMethod(out string value);
                 }
 
                 // Stop timing.
@@ -57,10 +40,11 @@ namespace TestPerformance
             }
             timeResult /= attempts;
 
-            return "GetField test.  Time elapsed:  " + timeResult.ToString() + " in seconds";
+            return "Using Out from method test.  Time elapsed:  " + timeResult.ToString() + " in seconds";
         }
 
-        public string GetProperty(int attempts)
+
+        private string TestReturnMethod(int attempts)
         {
             timeResult = 0;
 
@@ -70,19 +54,22 @@ namespace TestPerformance
 
                 for (int jdx = 0; jdx < Counter; ++jdx)
                 {
-                    var t = Target;
-                    if (t)
-                        continue;
+                    var value = ReturnMethod();
                 }
 
                 // Stop timing.
                 stopwatch.Stop();
                 timeResult += stopwatch.Elapsed.TotalSeconds;
             }
-
             timeResult /= attempts;
 
-            return "GetProperty test.  Time elapsed:  " + timeResult.ToString() + " in seconds";
+            return "Using Return from method test.  Time elapsed:  " + timeResult.ToString() + " in seconds";
         }
+
+
+
+
+        private void OutMethod(out string value) { value = "1"; }
+        private string ReturnMethod() { return "1"; }
     }
 }

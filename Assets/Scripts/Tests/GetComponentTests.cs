@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TestPerformance
 {
-    public class TestGetComponent : Test
+    public class GetComponentTests : Test
     {
         public int Counter = 10000;
 
