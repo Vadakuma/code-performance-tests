@@ -10,8 +10,8 @@ Used unity version: Unity 2019.1.14f
 * Get Field VS Get Property
 * ContainsKey VS TryGetValue from Dictionary (searching only existed key)
 * Using ToStrig()
-* Using Method inlining
-* Allocate item grom list in for loop
+* Using method inlining
+* Allocate item from list in for loop
 * Out VS Return
 * Remove action for List vs Dictionary
 
