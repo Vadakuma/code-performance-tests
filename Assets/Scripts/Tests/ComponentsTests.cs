@@ -6,7 +6,6 @@ namespace TestPerformance
 {
     public class ComponentsTests : Test
     {
-        public int TargetNumber = 100;
         public GetComponentTests notoptimized;
         public GetComponentTests optimized;
 
@@ -32,7 +31,7 @@ namespace TestPerformance
             optimized.gameObject.SetActive(false);
 
 
-            WriteResult(TargetNumber.ToString(), resultnotoptimized, resultoptimized);
+            WriteResult(Counter.ToString(), resultnotoptimized, resultoptimized);
         }
     }
 }

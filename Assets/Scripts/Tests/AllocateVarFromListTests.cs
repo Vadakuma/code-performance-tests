@@ -8,9 +8,6 @@ namespace TestPerformance
 {
     public class AllocateVarFromListTests : Test
     {
-        public int Counter = 1000;
-
-
         private List<string> _testlist = new List<string>();
 
         void Start()

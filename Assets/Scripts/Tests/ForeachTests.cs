@@ -43,16 +43,14 @@ namespace TestPerformance
 {
     public class ForeachTests : Test
     {
-        public GameObject target;
-        public int TargetNumber = 100;
-
-        private List<ObjectInfo> _targets = new List<ObjectInfo>();
+        public GameObject           Target;
+        private List<ObjectInfo>    _targets = new List<ObjectInfo>();
 
 
         private void Start()
         {
-            for (int idx = 0; idx < TargetNumber; ++idx)
-                _targets.Add(new ObjectInfo(target));
+            for (int idx = 0; idx < Counter; ++idx)
+                _targets.Add(new ObjectInfo(Target));
         }
 
         // Update is called once per frame
@@ -76,7 +74,7 @@ namespace TestPerformance
 
             var resultfor = StartForTest(Attempts);
 
-            WriteResult(TargetNumber.ToString(), resultforeach, resultfor);
+            WriteResult(Counter.ToString(), resultforeach, resultfor);
         }
 
 

@@ -9,12 +9,12 @@ namespace TestPerformance
     {
         private List<Item> _items = new List<Item>();
 
-        public int ItemAmount = 10000;
-        public int searchIndex = 499;
+        public int          searchIndex = 499;
+
         // Start is called before the first frame update
         void Start()
         {
-            for (int idx = 0; idx < ItemAmount; ++idx)
+            for (int idx = 0; idx < Counter; ++idx)
                 _items.Add(new ItemFloat(idx, idx));
         }
 
@@ -28,7 +28,7 @@ namespace TestPerformance
             var resultlinq = StartLinqTest(Attempts, searchIndex, _items);
             var resultfor = StartForTest(Attempts, searchIndex, _items);
 
-            WriteResult(ItemAmount.ToString(), resultlinq, resultfor);
+            WriteResult(Counter.ToString(), resultlinq, resultfor);
         }
 
         public string StartForTest(int attempts, float time, List<Item> keys)

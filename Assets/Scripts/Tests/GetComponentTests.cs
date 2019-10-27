@@ -8,8 +8,6 @@ namespace TestPerformance
 {
     public class GetComponentTests : Test
     {
-        public int Counter = 10000;
-
         public string TestMethod(int attempts, string name = null)
         {
             double timeResult = 0;

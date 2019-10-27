@@ -8,13 +8,14 @@ namespace TestPerformance
 {
     public class Test : MonoBehaviour
     {
+        public int  Counter = 1000;
         public Text debugField;
-        public int Attempts = 1;
+        public int  Attempts = 1;
 
 
         protected double timeResult;
 
-        public void WriteResult(string numberoftergets, string result1, string result2 )
+        protected void WriteResult(string numberoftergets, string result1, string result2 )
         {
             var totalresult = numberoftergets + "\n";
             totalresult += result1 + "\n";

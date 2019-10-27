@@ -8,9 +8,6 @@ namespace TestPerformance
 {
     public class ForceInlineMethodTests : Test
     {
-        public int Counter = 1000;
-
-
         public override void DoTest()
         {
             base.DoTest();

@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 
 namespace TestPerformance
 {
-    public class FieldVsPropertyTests : Test
+    public class RemoveListVSDictionary : Test
     {
-        public GameObject target;
+        private List<string>                _testList = new List<string>();
+        private Dictionary<string, string>  _testDict = new Dictionary<string, string>();
 
-        public GameObject Target
+
+        void Start()
         {
-            get
+            for (int idx = 0; idx < Counter; ++idx)
             {
-                if (target == null)
-                    return null;
-                return target;
+                _testList.Add(System.Guid.NewGuid().ToString());
+                _testDict.Add(System.Guid.NewGuid().ToString(), System.Guid.NewGuid().ToString());
             }
         }
 
@@ -24,29 +26,29 @@ namespace TestPerformance
         {
             base.DoTest();
             // avoiding memory allocate procces impact time
-            GetField(1); GetProperty(1);
+            DoRemoveFromList(1);
 
-            var resultfield = GetField(Attempts);
+            var resultlist = DoRemoveFromList(Attempts);
 
-            var resultprop = GetProperty(Attempts);
+            var resultdict = DoRemoveFromDictionary(Attempts);
 
-            WriteResult(Counter.ToString(), resultfield, resultprop);
+            WriteResult(Counter.ToString(), resultlist, resultdict);
         }
 
 
-        public string GetField(int attempts)
+        private string DoRemoveFromList(int attempts)
         {
             timeResult = 0;
 
             for (int idx = 0; idx < attempts; ++idx)
             {
+                var tmplist = new List<string>(_testList);
+
                 Stopwatch stopwatch = new Stopwatch(); stopwatch.Start();
 
                 for (int jdx = 0; jdx < Counter; ++jdx)
                 {
-                    var t = target;
-                    if (t)
-                        continue;
+                    tmplist.Remove(tmplist[0]);
                 }
 
                 // Stop timing.
@@ -55,32 +57,33 @@ namespace TestPerformance
             }
             timeResult /= attempts;
 
-            return "GetField test.  Time elapsed:  " + timeResult.ToString() + " in seconds";
+            return "Remove from list test.  Time elapsed:  " + timeResult.ToString() + " in seconds";
         }
 
-        public string GetProperty(int attempts)
+
+        private string DoRemoveFromDictionary(int attempts)
         {
             timeResult = 0;
 
             for (int idx = 0; idx < attempts; ++idx)
             {
+                var tmpdict = new Dictionary<string, string>(_testDict);
+                var keyslist = tmpdict.Keys.ToList();
+
                 Stopwatch stopwatch = new Stopwatch(); stopwatch.Start();
 
                 for (int jdx = 0; jdx < Counter; ++jdx)
                 {
-                    var t = Target;
-                    if (t)
-                        continue;
+                    tmpdict.Remove(keyslist[jdx]);
                 }
 
                 // Stop timing.
                 stopwatch.Stop();
                 timeResult += stopwatch.Elapsed.TotalSeconds;
             }
-
             timeResult /= attempts;
 
-            return "GetProperty test.  Time elapsed:  " + timeResult.ToString() + " in seconds";
+            return "Remove from dictionary test.  Time elapsed:  " + timeResult.ToString() + " in seconds";
         }
     }
 }

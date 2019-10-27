@@ -7,9 +7,6 @@ namespace TestPerformance
 {
     public class StringTests : Test
     {
-        public int Counter = 1000;
-
-
         public override void DoTest()
         {
             base.DoTest();

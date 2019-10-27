@@ -7,7 +7,6 @@ namespace TestPerformance
 {
     public class ContainsKeyTests : Test
     {
-        public int Counter = 1000;
         public int DictionaryCounter = 3000;
 
         private Dictionary<string, string>  _dict = new Dictionary<string, string>();
@@ -17,14 +16,15 @@ namespace TestPerformance
         void Start()
         {
             for (int idx = 0; idx < DictionaryCounter; ++idx)
-                _dict.Add(System.Guid.NewGuid().ToString(), System.Guid.NewGuid().ToString());
+            {
+                _keyrandom = System.Guid.NewGuid().ToString();
+                _dict.Add(_keyrandom, System.Guid.NewGuid().ToString());
+            }
         }
 
         public override void DoTest()
         {
             base.DoTest();
-            //_keyrandom = Random.Range(_dict.Count/2, _dict.Count - 1);
-            _keyrandom = System.Guid.NewGuid().ToString();
             // avoiding memory allocate procces impact time
             TestContainsKey(1);
 
